@@ -1,5 +1,7 @@
 package com.neotech.db.lesson05;
 
+// Part 3
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,7 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCDemo1 {
-
+	
+	// To connect the database
 	public static String dbUsername = "user1";
 	public static String dbPassword = "Neotech@123";
 
@@ -17,14 +20,18 @@ public class JDBCDemo1 {
 	public static void main(String[] args) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+		// getConnection -> Need to do SQLException just in case if the server is not working.
 
 		System.out.println("Connection established successfully!");
 
 		// create a sql statement
 		Statement st = conn.createStatement();
+		// statement = object, import "java.sql.Statement"
 
 		// execute the sql statement
 		ResultSet rs = st.executeQuery("Select * from book");
+		// "Select * from book" is from MySQL Workbench to show all books.
+		// "ResutlSet" to show the result we see in SQL Workbench.
 
 		System.out.println("------------------");
 		System.out.println(rs.toString());

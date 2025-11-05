@@ -1,6 +1,6 @@
 package com.neotech.steps;
 
-// Part-1
+// API Class, Lesson 06, Part-1
 
 import com.neotech.utils.APIConstants;
 
