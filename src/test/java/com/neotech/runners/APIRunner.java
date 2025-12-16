@@ -14,7 +14,7 @@ import io.cucumber.junit.CucumberOptions;
 		glue = "com.neotech.steps",
 		dryRun = false,
 		monochrome = true,
-		tags = "@OneClass",
+		tags = "@Student",
 
 		plugin = { 
 				// "pretty",

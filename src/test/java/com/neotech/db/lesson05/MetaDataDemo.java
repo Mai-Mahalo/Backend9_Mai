@@ -17,13 +17,20 @@ public class MetaDataDemo {
 	public static String dbUrl = "jdbc:mysql://hrm.neotechacademy.com:3306/classicmodels";
 
 	@Test
+	// @Test = main method
+	// if we can't import "Test", add cucumber and JUnit to pom.xml
 	public void dbMetaData() throws SQLException {
 		Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+		// import "java.sql.connection"
+		// throw exception
 
 		// Get the metadata of the database
+		// Get necessary information (Driver name and version) from the server.
 		DatabaseMetaData dbMetaData = conn.getMetaData();
 
-		String driverName = dbMetaData.getDriverName();
+		String driverName = dbMetaData.getDriverName(); 
+		// get a driver version, it is shown "session" on the bottom left in MySQL Workbench
+		// Eg: MariaDB Server (10.3.32-MariaDB)
 		System.out.println(driverName);
 
 		String dbVersion = dbMetaData.getDatabaseProductVersion();
@@ -31,6 +38,9 @@ public class MetaDataDemo {
 
 		conn.close();
 	}
+	
+	// Data = names of "SQL", "Oracle" and  etc.
+	// result set meta data = How many columns, names of columns "BookName", "Bookid" and etc.
 
 	@Test
 	public void rsMetaData() throws SQLException {
@@ -41,6 +51,8 @@ public class MetaDataDemo {
 
 		// execute a query
 		ResultSet rs = st.executeQuery("SELECT * FROM employees WHERE employeeNumber > 1111;");
+		// This is from MySQL Workbench. "SELECT * FROM employees WHERE employeeNumber > 1111;"
+		// We want to execute "employeeNumber" columns from "employees" table.
 
 		// we have the result set, lets get the metadata
 		ResultSetMetaData rsMetaData = rs.getMetaData();
@@ -60,6 +72,8 @@ public class MetaDataDemo {
 		System.out.println("Third column name: " + thirdColumnName);
 
 		// i can get the types of the columns
+		// The following data is shown in "Object Info" in the bottom left in MuSQL Workbench.
+		// Choose "employee" table, and check "Object Info".
 		for (int i = 1; i <= columnCount; i++) {
 			String columnName = rsMetaData.getColumnName(i);
 			String columnType = rsMetaData.getColumnTypeName(i);

@@ -1,5 +1,8 @@
 package com.neotech.db.lesson06;
 
+// Part-3 (20:00)
+// This code shows step by step using DBUtils to make the testing more dynamic and shorter code.
+
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +29,9 @@ public class StoringDataUsingDBUtils extends DBUtils {
 	}
 
 	@Test
-	public void getDataFromDB2() {
+	public void getDataFromDB2() { 
+		// getDataFromDB2 is from DBUtils class.
+		// NO need to open and close the connection because we created the method in DBUtils.
 		String query = "SELECT employeeNumber, lastName, firstName, email FROM employees LIMIT 5;";
 		List<Map<String, String>> employeeList = storeDataFromDb2(query);
 
@@ -49,6 +54,8 @@ public class StoringDataUsingDBUtils extends DBUtils {
 			System.out.println("Contact First Name: " + customer.get("contactFirstName"));
 			System.out.println("Phone: " + customer.get("phone"));
 			System.out.println("-----------------------------");
+			
+			// We can choose any formats to print with for loop or List.
 		}
 	}
 }

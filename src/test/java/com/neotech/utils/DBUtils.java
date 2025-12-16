@@ -1,5 +1,7 @@
 package com.neotech.utils;
 
+// SQL Lesson 06, Part-3
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,11 +15,13 @@ import java.util.Map;
 
 public class DBUtils {
 
-	private static Connection conn;
+	private static Connection conn; 
+	// converted to instance variables coz it would be 2 "conn" below.
 	private static ResultSet rs;
 	private static Statement st;
+	// st = statement
 
-	public static void getConnection() {
+	public static void getConnection() { // = Method
 		ConfigsReader.readProperties(Constants.CONFIGURATION_FILEPATH);
 
 		try {
@@ -29,7 +33,9 @@ public class DBUtils {
 		}
 	}
 
-	public static List<Map<String, String>> storeDataFromDb(String query) {
+	public static List<Map<String, String>> storeDataFromDb(String query) { // method
+		// Getting data from database (=DB)
+		// copy and pasted from "StoringData", and modified.
 
 		try {
 			st = conn.createStatement();
@@ -60,14 +66,16 @@ public class DBUtils {
 		}
 	}
 
-	public static List<Map<String, String>> storeDataFromDb2(String query) {
+	public static List<Map<String, String>> storeDataFromDb2(String query) { 
+		// method for the 1st method of StoringDataUsingDBUtils class.
+		// This is the way to omit write code for opening and closing the connection.
 		getConnection();
 		List<Map<String, String>> data = storeDataFromDb(query);
 		closeConnection();
 		return data;
 	}
 
-	public static void closeConnection() {
+	public static void closeConnection() { // method
 		try {
 			if (conn != null) {
 				conn.close();

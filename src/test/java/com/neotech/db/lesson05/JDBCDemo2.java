@@ -1,5 +1,7 @@
 package com.neotech.db.lesson05;
 
+// Part-04
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -28,6 +30,8 @@ public class JDBCDemo2 {
 
 		// execute the sql statement
 		ResultSet rs = st.executeQuery("Select * from bookcategory");
+		// "ResultSet" is from JavaSQL library = object
+		
 
 		// Convert the ResultSet to ArrayList
 		ArrayList<String> bookCategories = new ArrayList<>();

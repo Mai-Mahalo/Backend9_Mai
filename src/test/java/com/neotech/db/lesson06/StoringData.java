@@ -1,5 +1,7 @@
 package com.neotech.db.lesson06;
 
+// Part-2
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -27,7 +29,7 @@ public class StoringData {
 
 		Statement st = conn.createStatement();
 		ResultSet rs = st
-				.executeQuery("select employeeNumber,lastName, firstName, email from employees limit 5;");
+				.executeQuery("select employeeNumber,lastName, firstName, email, from employees limit 5;");
 
 		List<Map<String, String>> employeeList = new ArrayList<>();
 		Map<String, String> employeeData;
@@ -75,6 +77,19 @@ public class StoringData {
 				String columnName = rsMetaData.getColumnName(i);
 				String columnValue = rs.getString(i);
 				employeeData.put(columnName, columnValue);
+				
+				// This code above is more dynamic and improved from the one below.
+				
+//				while (rs.next()) {
+//					employeeData = new LinkedHashMap<>();
+//
+//					employeeData.put("Employee Number", rs.getString("employeeNumber"));
+//					employeeData.put("Last Name", rs.getString("lastName"));
+//					employeeData.put("First Name", rs.getString("firstName"));
+//					employeeData.put("Email", rs.getString("email"));
+//
+//					employeeList.add(employeeData);
+
 			}
 
 			employeeList.add(employeeData);
