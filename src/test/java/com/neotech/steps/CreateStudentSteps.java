@@ -1,5 +1,9 @@
 package com.neotech.steps;
 
+import static org.hamcrest.Matchers.equalTo;
+
+import java.util.Map;
+
 import org.json.JSONObject;
 
 import com.neotech.utils.APIConstants;
@@ -10,6 +14,7 @@ import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.Assert;
 
 public class CreateStudentSteps {
 	// API Lesson 06, Part-3, 9:00
@@ -50,7 +55,33 @@ public class CreateStudentSteps {
 	}
 	@Then("I validate that information of the created student")
 	public void i_validate_that_information_of_the_created_student() {
-		response.then().assertThat()
+		response.then().assertThat().body("result.firstName", equalTo(APIGlobalVariables.firstName))
+		        .and().body("result.lastName", equalTo(APIGlobalVariables.lastName))
+		        .and().body("result.email", equalTo(APIGlobalVariables.email))
+		        .and().body("result.city", equalTo(APIGlobalVariables.city))
+		        .and().body("result.state", equalTo(APIGlobalVariables.state));
+		        // .and().body("result.studentNumber", equalTo(APIGlobalVariables.studentNumber));
+		
+		// lets validate the student number using JUnit assertion
+		String studentNumber = response.body().jsonPath().getString("result.studentNumber");
+		Assert.assertEquals(APIGlobalVariables. studentNumber, studentNumber);
+		
+		// lets get all the student information and print them
+		Map<String, String> studentInfo = response.body().jsonPath().getMap("result");
+		
+		System.out.println("The student information:" + studentInfo);
+		
+		
+		
+		// Check if the token still works (It is expired in 24 hours.)
+		// If it is expired, use API Runner to run @Token, then update the token on APIGlobalVariant.
+		
+		// I may also iterate through the map
+		// task:
+		
+		
+		
+		
 		
 	    
 	}
